@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="725.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fiap.PrimaryController">
+  <tabs>
+    <Tab text="Cadastrar Conta">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <items>
+                      <Button defaultButton="true" mnemonicParsing="false" onAction="#cadastrarContas" text="Cadastrar Conta" />
+                        <Button mnemonicParsing="false" onAction="#limparCampos" text="Limpar Campos" />
+                    </items>
+                  </ToolBar>
+               </bottom>
+               <center>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Cadastro de Contas">
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <VBox prefWidth="100.0">
+                           <children>
+                              <Label text="Nome da Conta">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txfConta" prefWidth="580.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <GridPane alignment="CENTER" hgap="10.0" prefHeight="0.0" prefWidth="580.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints fillHeight="false" maxHeight="-Infinity" vgrow="ALWAYS" />
+                          </rowConstraints>
+                           <children>
+                              <VBox maxHeight="1.7976931348623157E308" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Valor">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" text="R$">
+                                             <HBox.margin>
+                                                <Insets right="2.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextField fx:id="txfValor" prefHeight="25.0" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefWidth="158.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label text="Vencimento">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="dtVencimento" editable="false" maxWidth="1.7976931348623157E308" />
+                                 </children>
+                              </VBox>
+                              <VBox prefWidth="186.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <Label text="Categoria">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <ChoiceBox fx:id="cbxCategoria" maxWidth="1.7976931348623157E308" prefWidth="202.0" />
+                                 </children>
+                              </VBox>
+                              <VBox prefWidth="186.0" GridPane.columnIndex="3">
+                                 <children>
+                                    <Label text="Status">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <CheckBox fx:id="cbxStatus" mnemonicParsing="false" prefHeight="25.0" text="Conta paga" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </GridPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </center>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </BorderPane>
+         </content>
+    </Tab>
+    <Tab text="Visualizar Contas">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <left>
+                  <ToolBar orientation="VERTICAL" prefHeight="371.0" prefWidth="110.0" BorderPane.alignment="CENTER">
+                    <items>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Ações">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <GridPane hgap="2.0" vgap="2.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="pagarConta" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pagarConta" style="-fx-background-color: #43a047; -fx-text-fill: white;" text="Pagar" />
+                              <Button fx:id="removerConta" cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#removerConta" style="-fx-background-color: #e53935; -fx-text-fill: white;" text="Remover" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Separator prefWidth="200.0" />
+                        <Label text="Ordenar por..." />
+                        <GridPane hgap="2.0" vgap="2.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="ordenarValor" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ordenarPorValor" text=" Valor" />
+                              <Button fx:id="ordenarVencimento" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ordenarPorVencimento" text="Vencimento" GridPane.columnIndex="1" />
+                            <Button fx:id="ordenarCategoria" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ordenarPorCategoria" text="Categoria" GridPane.rowIndex="1" />
+                              <Button fx:id="ordenarStatus" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ordenarPorStatus" text="Status" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Button fx:id="redefinirOrd" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#ordenarPorID" text="Redefinir ordenação" />
+                    </items>
+                  </ToolBar>
+               </left>
+               <center>
+                  <BorderPane BorderPane.alignment="CENTER">
+                     <center>
+                        <ListView fx:id="tblContas" prefHeight="200.0" prefWidth="200.0" />
+                     </center>
+                  </BorderPane>
+               </center>
+            </BorderPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
