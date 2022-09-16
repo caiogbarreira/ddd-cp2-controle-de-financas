@@ -24,7 +24,6 @@ import javafx.scene.control.TextField;
 public class SistemaController implements Initializable{
     
     // Cadastro de Contas
-    private int nextID = 0;
     @FXML TextField txfConta;
     @FXML TextField txfValor;
     @FXML DatePicker dtVencimento;
@@ -45,8 +44,7 @@ public class SistemaController implements Initializable{
             String validade = dtVencimento.getValue().toString();
             String categoria = cbxCategoria.getValue();
             boolean paga = cbxStatus.isSelected();
-            Conta conta = new Conta(nextID, nomeConta, valor, validade, categoria, paga);
-            nextID++;
+            Conta conta = new Conta(nomeConta, valor, validade, categoria, paga);
             contas.add(conta);
             if (paga) {
                 contasPagas.add(conta);
@@ -54,7 +52,7 @@ public class SistemaController implements Initializable{
                 contasNaoPagas.add(conta);
             }
             atualizarTabela();
-            // limparCampos();
+            limparCampos();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Cadastro de Contas");
             alert.setHeaderText("Conta cadastrada com sucesso!");
@@ -133,9 +131,9 @@ public class SistemaController implements Initializable{
     @FXML Button pagarConta;
     
     public void atualizarTabela() {
-        tblContas.getColumns().clear();
+        // tblContas.getColumns().clear();
         tblContas.getItems().clear();
-        tblContas.getColumns().addAll(tblcID, tblcNome, tblcValor, tblcVencimento, tblcCategoria, tblcPago);
+        // tblContas.getColumns().addAll(tblcID, tblcNome, tblcValor, tblcVencimento, tblcCategoria, tblcPago);
         tblContas.getItems().addAll(contas);
 
         tblcID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
@@ -145,9 +143,9 @@ public class SistemaController implements Initializable{
         tblcCategoria.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategoria()));
         tblcPago.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().isPaga() ? "Sim" : "Não"));
 
-        tblContasPagas.getColumns().clear();
+        // tblContasPagas.getColumns().clear();
         tblContasPagas.getItems().clear();
-        tblContasPagas.getColumns().addAll(tblcID1, tblcNome1, tblcValor1, tblcVencimento1, tblcCategoria1, tblcPago1);
+        // tblContasPagas.getColumns().addAll(tblcID1, tblcNome1, tblcValor1, tblcVencimento1, tblcCategoria1, tblcPago1);
         tblContasPagas.getItems().addAll(contasPagas);
 
         tblcID1.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
@@ -157,9 +155,9 @@ public class SistemaController implements Initializable{
         tblcCategoria1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategoria()));
         tblcPago1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().isPaga() ? "Sim" : "Não"));
 
-        tblContasNaoPagas.getColumns().clear();
+        // tblContasNaoPagas.getColumns().clear();
         tblContasNaoPagas.getItems().clear();
-        tblContasNaoPagas.getColumns().addAll(tblcID11, tblcNome11, tblcValor11, tblcVencimento11, tblcCategoria11, tblcPago11);
+        // tblContasNaoPagas.getColumns().addAll(tblcID11, tblcNome11, tblcValor11, tblcVencimento11, tblcCategoria11, tblcPago11);
         tblContasNaoPagas.getItems().addAll(contasNaoPagas);
 
         tblcID11.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
@@ -232,6 +230,8 @@ public class SistemaController implements Initializable{
 
     public void pagarConta(){
         Conta conta = tblContas.getSelectionModel().getSelectedItem();
+        Conta contaPaga = tblContasPagas.getSelectionModel().getSelectedItem();
+        Conta contaNaoPaga = tblContasNaoPagas.getSelectionModel().getSelectedItem();
 
         if(conta != null){
             if(conta.isPaga()){
@@ -248,14 +248,34 @@ public class SistemaController implements Initializable{
                 var resultado = alert.showAndWait();
                 if (resultado.get().getText().equals("OK")) {
                     conta.setPaga(true);
+                    contasPagas.add(conta);
+                    contasNaoPagas.remove(conta);
                     atualizarTabela();
                 }
+            }
+        } else if (contaPaga != null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setHeaderText("Erro ao pagar conta");
+            alert.setContentText("A conta selecionada já está paga");
+            alert.showAndWait();
+        } else if (contaNaoPaga != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmação");
+            alert.setHeaderText("Pagar conta");
+            alert.setContentText("Deseja realmente pagar a conta selecionada?");
+            var resultado = alert.showAndWait();
+            if (resultado.get().getText().equals("OK")) {
+                contaNaoPaga.setPaga(true);
+                contasPagas.add(contaNaoPaga);
+                contasNaoPagas.remove(contaNaoPaga);
+                atualizarTabela();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erro");
-            alert.setHeaderText("Erro ao pagar conta");
-            alert.setContentText("Nenhuma conta selecionada");
+            alert.setHeaderText("Nenhuma conta selecionada");
+            alert.setContentText("Selecione uma conta para pagar");
             alert.showAndWait();
         }
     }

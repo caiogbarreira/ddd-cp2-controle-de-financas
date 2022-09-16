@@ -1,6 +1,9 @@
 package br.com.fiap.model;
 
 public class Conta {
+
+    private static int ultimoId = 0;
+
     private int id;
     private String nomeConta;
     private double valor;
@@ -8,8 +11,8 @@ public class Conta {
     private boolean paga;
     private String categoria;
     
-    public Conta(int id, String nomeConta, double valor, String validade, String categoria, boolean paga) {
-        this.id = id;
+    public Conta(String nomeConta, double valor, String validade, String categoria, boolean paga) {
+        this.id = ultimoId++;
         this.nomeConta = nomeConta;
         this.valor = valor;
         this.validade = validade;
